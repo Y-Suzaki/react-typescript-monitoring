@@ -22,7 +22,7 @@ export const Header: FC = memo(function Header() {
 
   return (
     <>
-      <Flex as="nav" bg="teal.700" color="gray.50" align="center" justify="space-between" padding={{ base: 3, md: 5 }}>
+      <Flex as="nav" bg="teal.700" color="gray.50" align="center" justify="space-between" padding={{ base: 2, md: 3 }}>
         <Flex align="center" as="a" mr={8} _hover={{ cursor: 'pointer' }} onClick={onClickHome}>
           <Heading as="h1" fontSize={{ base: 'md', md: 'lg' }}>
             Drive Backoffice

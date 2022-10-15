@@ -5,14 +5,17 @@ import { Login } from '../components/pages/Login';
 import { Setting } from '../components/pages/Setting';
 import { UserManagement } from '../components/pages/UserManagement';
 import { NotFound } from '../components/pages/NotFound';
+import { LoginUserProvider } from '../providers/LoginUserProvider';
 
 export const Router = memo(function Router() {
   return (
-    <Routes>
-      <Route path={'/'} element={<Login />} />
-      <Route path={'/home/*'} element={<Homes />} />
-      <Route path={'*'} element={<NotFound />} />
-    </Routes>
+    <LoginUserProvider>
+      <Routes>
+        <Route path={'/'} element={<Login />} />
+        <Route path={'/home/*'} element={<Homes />} />
+        <Route path={'*'} element={<NotFound />} />
+      </Routes>
+    </LoginUserProvider>
   );
 });
 
