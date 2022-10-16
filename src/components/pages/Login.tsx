@@ -1,14 +1,29 @@
 import { ChangeEvent, memo, useState, FC } from 'react';
-import { Box, Divider, Flex, Heading, Input, Stack } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Heading, Input, InputGroup, Stack, InputRightElement } from '@chakra-ui/react';
 import { PrimaryButton } from '../atoms/button/PrimaryButton';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthMethod } from '../../hooks/useAuthMethod';
 
 export const Login: FC = memo(function Login() {
-  const [userId, setUserId] = useState('');
-  const { login, loading } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const { signIn } = useAuthMethod();
 
-  const onChangeUserId = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserId(e.target.value);
+  const onClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const onChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const login = async () => {
+    console.log('login');
+    const result = await signIn(username, password);
+    console.log(result);
   };
 
   return (
@@ -19,14 +34,21 @@ export const Login: FC = memo(function Login() {
         </Heading>
         <Divider my={4} />
         <Stack spacing={4} py={4} px={10}>
-          <Input placeholder="User ID" onChange={onChangeUserId} value={userId} />
-          <PrimaryButton
-            loading={loading}
-            disable={userId === ''}
-            onClick={() => {
-              login(userId);
-            }}
-          >
+          <Input placeholder="Username" onChange={onChangeUsername} value={username} />
+          <InputGroup>
+            <Input
+              placeholder="Password"
+              type={showPassword ? 'text' : 'password'}
+              onChange={onChangePassword}
+              value={password}
+            />
+            <InputRightElement width="4.5rem" py={2}>
+              <Button h="1.75rem" size="sm" onClick={onClickShowPassword}>
+                {showPassword ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          <PrimaryButton loading={false} disable={false} onClick={login}>
             Login
           </PrimaryButton>
         </Stack>

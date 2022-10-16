@@ -7,14 +7,14 @@ import { UserCard } from '../organisms/UserCard';
 import { UserDetailModal } from '../organisms/UserDetailModal';
 import { Simulate } from 'react-dom/test-utils';
 import timeUpdate = Simulate.timeUpdate;
-import { useLoginUser } from '../../hooks/useLoginUser';
+// import { useLoginUser } from '../../hooks/useLoginUser';
 
 // 無名関数だとLinterで指摘される。
 export const UserManagement: FC = memo(function UserManagement() {
   const { users, loading, getAllUsers } = useAllUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { selectedUser, selectUser } = useSelectUser();
-  const { loginUser } = useLoginUser();
+  // const { loginUser } = useLoginUser();
 
   // 詳細画面時に呼ばれる関数
   const onClickUser = useCallback(
@@ -53,7 +53,7 @@ export const UserManagement: FC = memo(function UserManagement() {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} user={selectedUser} isAdmin={loginUser?.isAdmin} />
+      {/*<UserDetailModal isOpen={isOpen} onClose={onClose} user={selectedUser} isAdmin={loginUser?.isAdmin} />*/}
     </>
   );
 });

@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Create Cognito User Pool.
+
+Parameters:
+  Env:
+    Type: String
+    Default: dev
+
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: admin_only
+            Priority: 1
+      AliasAttributes:
+        - preferred_username
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: true
+      #      MfaConfiguration: OFF
+      Policies:
+        PasswordPolicy:
+          RequireLowercase: true
+          RequireSymbols: false
+          RequireNumbers: true
+          MinimumLength: 8
+          RequireUppercase: false
+      #      Schema:
+      #        - Name: preferred_username
+      #          AttributeDataType: String
+      #          DeveloperOnlyAttribute: false
+      #          Mutable: true
+      #          Required: true
+      UsernameConfiguration:
+        CaseSensitive: false
+      UserPoolName: !Sub ys-dev-web-pool-backoffice-${Env}
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: !Sub ys-dev-web-pool-backoffice-client-${Env}
+      ExplicitAuthFlows:
+        - ALLOW_USER_SRP_AUTH
+        - ALLOW_ADMIN_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      GenerateSecret: false
+      PreventUserExistenceErrors: ENABLED
+      RefreshTokenValidity: 365
+      UserPoolId: !Ref UserPool
+
+Outputs:
+  UserPool:
+    Value: !Ref UserPool
+  UserPoolClient:
+    Value: !Ref UserPoolClient
