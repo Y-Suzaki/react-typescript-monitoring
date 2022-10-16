@@ -1,7 +1,7 @@
 import { FC, memo, useCallback, useEffect } from 'react';
 import { Header } from '../organisms/Header';
 import { useAllUsers } from '../../hooks/useAllUsers';
-import { useSelectUser } from '../../hooks/useSelectUser';
+// import { useSelectUser } from '../../hooks/useSelectUser';
 import { Center, Spinner, Wrap, WrapItem, useDisclosure } from '@chakra-ui/react';
 import { UserCard } from '../organisms/UserCard';
 import { UserDetailModal } from '../organisms/UserDetailModal';
@@ -13,14 +13,14 @@ import timeUpdate = Simulate.timeUpdate;
 export const UserManagement: FC = memo(function UserManagement() {
   const { users, loading, getAllUsers } = useAllUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { selectedUser, selectUser } = useSelectUser();
+  // const { selectedUser, selectUser } = useSelectUser();
   // const { loginUser } = useLoginUser();
 
   // 詳細画面時に呼ばれる関数
   const onClickUser = useCallback(
     (id: number) => {
       // selectUser(id, users, onOpen);
-      selectUser(id, users, onOpen);
+      // selectUser(id, users, onOpen);
     },
     [users],
   );
