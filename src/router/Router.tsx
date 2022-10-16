@@ -9,6 +9,7 @@ import { PrivateRouter } from './PrivateRouter';
 import { useAuth } from '../hooks/useAuth';
 import { useAuthSession } from '../hooks/useAuthSession';
 import { LoadingSpinner } from '../components/atoms/spinner/LoadingSpinner';
+import { Location } from '../components/pages/Location';
 
 export const Router = function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -59,7 +60,7 @@ const Homes = memo(function Homes(props: { isAuthenticated: boolean }) {
         path={'/location'}
         element={
           <PrivateRouter isAuthenticated={isAuthenticated}>
-            <Setting />
+            <Location />
           </PrivateRouter>
         }
       />
@@ -84,16 +85,4 @@ const Homes = memo(function Homes(props: { isAuthenticated: boolean }) {
       <Route path={'*'} element={<NotFound />} />
     </Routes>
   );
-  // return loginUser ? (
-  //   <Routes>
-  //     <Route path={'/'} element={<Home />} />
-  //     <Route path={'/setting'} element={<Setting />} />
-  //     <Route path={'/user_management'} element={<UserManagement />} />
-  //     <Route path={'*'} element={<NotFound />} />
-  //   </Routes>
-  // ) : (
-  //   <>
-  //     <Navigate to="/" />
-  //   </>
-  // );
 });

@@ -16,23 +16,32 @@ export const Header: FC = memo(function Header() {
   const onClickSetting = useCallback(() => {
     navigate('/home/setting');
   }, []);
-  const onClickUserManagement = useCallback(() => {
-    navigate('/home/user_management');
+  const onClickLocation = useCallback(() => {
+    navigate('/home/location');
+  }, []);
+
+  const onClickEvent = useCallback(() => {
+    navigate('/home/event');
   }, []);
 
   return (
     <>
-      <Flex as="nav" bg="teal.700" color="gray.50" align="center" justify="space-between" padding={{ base: 2, md: 3 }}>
-        <Flex align="center" as="a" mr={8} _hover={{ cursor: 'pointer' }} onClick={onClickHome}>
+      <Flex as="nav" bg="teal.800" color="gray.50" align="center" justify="space-between" padding={{ base: 2, md: 3 }}>
+        <Flex align="center" as="a" mr={8} _hover={{ cursor: 'pointer', opacity: 0.7 }} onClick={onClickHome}>
           <Heading as="h1" fontSize={{ base: 'md', md: 'lg' }}>
             Drive Backoffice
           </Heading>
         </Flex>
-        <Flex fontSize="sm" align="center" flexGrow={2} display={{ base: 'none', md: 'flex' }}>
-          <Box pr={5}>
-            <Link onClick={onClickUserManagement}>UserManagement</Link>
+        <Flex fontSize="md" align="center" flexGrow={4} display={{ base: 'none', md: 'flex' }}>
+          <Box pr={5} _hover={{ opacity: 0.7 }}>
+            <Link onClick={onClickLocation}>Location</Link>
           </Box>
-          <Link onClick={onClickSetting}>Setting</Link>
+          <Box pr={5} _hover={{ opacity: 0.7 }}>
+            <Link onClick={onClickEvent}>Event</Link>
+          </Box>
+          <Box _hover={{ opacity: 0.7 }}>
+            <Link onClick={onClickSetting}>Setting</Link>
+          </Box>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
@@ -40,7 +49,7 @@ export const Header: FC = memo(function Header() {
         isOpen={isOpen}
         onClose={onClose}
         onClickHome={onClickHome}
-        onClickUserManagement={onClickUserManagement}
+        onClickUserManagement={onClickLocation}
         onClickSetting={onClickSetting}
       />
     </>
