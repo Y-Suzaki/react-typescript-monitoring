@@ -30,7 +30,7 @@ export const SettingList: FC<Props> = memo(function SettingList(props) {
               {Object.entries(categoryValue).map(([key, value]) => (
                 <HStack key={key}>
                   <Text width="50%">{key}</Text>
-                  <p>{value}</p>
+                  <Text>{value}</Text>
                 </HStack>
               ))}
             </Stack>

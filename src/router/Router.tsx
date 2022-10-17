@@ -10,6 +10,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useAuthSession } from '../hooks/useAuthSession';
 import { LoadingSpinner } from '../components/atoms/spinner/LoadingSpinner';
 import { Location } from '../components/pages/Location';
+import { Event } from '../components/pages/Event';
 
 export const Router = function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -68,7 +69,7 @@ const Homes = memo(function Homes(props: { isAuthenticated: boolean }) {
         path={'/event'}
         element={
           <PrivateRouter isAuthenticated={isAuthenticated}>
-            <Setting />
+            <Event />
           </PrivateRouter>
         }
       />
