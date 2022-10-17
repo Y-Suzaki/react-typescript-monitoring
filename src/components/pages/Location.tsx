@@ -1,7 +1,7 @@
-import { Box, Divider, VStack } from '@chakra-ui/react';
+import { Divider, VStack } from '@chakra-ui/react';
 import { FC, memo } from 'react';
 import { Header } from '../organisms/Header';
-import { SearchBox } from '../organisms/location/SearchBox';
+import { SearchDayBox } from '../organisms/SearchDayBox';
 import { LocationList } from '../organisms/location/LocationList';
 import { useLocationList } from '../../hooks/useLocationList';
 
@@ -18,7 +18,7 @@ export const Location: FC = memo(function Setting() {
     <>
       <Header />
       <VStack align={'left'} bgColor={'white'} borderRadius={'md'} shadow={'md'} m={4}>
-        <SearchBox isLoading={isLoading} onClickSearch={onClickSearch} />
+        <SearchDayBox isLoading={isLoading} onClickSearch={onClickSearch} />
         <Divider />
         <LocationList locationList={locationList} />
       </VStack>
