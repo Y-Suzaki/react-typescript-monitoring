@@ -2,16 +2,26 @@ import { useState } from 'react';
 import { Location } from '../types/api/location';
 import axios from 'axios';
 import { useMessage } from './useMessage';
+import { useIdToken } from './useIdToken';
 
 export const useLocationList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [locationList, setLocationList] = useState<Array<Location>>([]);
   const { showMessage } = useMessage();
-
+  const { getIdToken } = useIdToken();
   const apiDomain = process.env.REACT_APP_BACKOFFICE_API_DOMAIN;
 
   const getLocationList = (imei: string, day: string) => {
+    console.log('`*************************');
     setIsLoading(true);
+
+    getIdToken()
+      .then((token) => {
+        axios.defaults.headers.common['Authorization'] = token;
+      })
+      .catch(() => {
+        return;
+      });
 
     axios
       .get<Array<Location>>(`${apiDomain}/locations`)
