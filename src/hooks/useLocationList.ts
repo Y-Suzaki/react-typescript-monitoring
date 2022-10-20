@@ -13,6 +13,10 @@ export const useLocationList = () => {
 
   const getLocationList = (imei: string, day: string) => {
     console.log('`*************************');
+    const start = `${day}T00:00:00Z`;
+    const end = `${day}T23:59:59`;
+    console.log(start, end);
+    console.log('`*************************');
     setIsLoading(true);
 
     getIdToken()
