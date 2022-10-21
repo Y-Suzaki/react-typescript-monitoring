@@ -57,7 +57,7 @@ export const EventSummaries: FC<Props> = memo(function EventSummaries(props) {
           </Tbody>
         </Table>
       </TableContainer>
-      <EventDetailModal isOpen={isOpen} onClose={onClose} />
+      <EventDetailModal detail={eventDetail} isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 });
