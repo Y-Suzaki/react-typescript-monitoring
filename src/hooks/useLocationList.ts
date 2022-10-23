@@ -11,41 +11,28 @@ export const useLocationList = () => {
   const { getIdToken } = useIdToken();
   const apiDomain = process.env.REACT_APP_BACKOFFICE_API_DOMAIN;
 
-  const getLocationList = (imei: string, day: string) => {
-    console.log('`*************************');
+  const getLocationList = async (imei: string, day: string) => {
     const start = `${day}T00:00:00Z`;
     const end = `${day}T23:59:59`;
-    console.log(start, end);
-    console.log('`*************************');
     setIsLoading(true);
 
-    getIdToken()
-      .then((token) => {
-        axios.defaults.headers.common['Authorization'] = token;
-      })
-      .catch(() => {
-        return;
-      });
-
-    axios
-      .get<Array<Location>>(`${apiDomain}/locations`)
-      .then((response) => {
-        const data: Array<Location> = response.data.map((location) => ({
-          date_time: location.date_time,
-          lat: location.lat,
-          lng: location.lng,
-          device_mode: location.device_mode,
-        }));
-        console.log(data);
-        setLocationList(data);
-      })
-      .catch((e) => {
-        console.log(e);
-        showMessage({ title: 'Failed to get location list.', status: 'error' });
-      })
-      .finally(() => setIsLoading(false));
-
-    setIsLoading(false);
+    try {
+      axios.defaults.headers.common['Authorization'] = await getIdToken();
+      const response = await axios.get<Array<Location>>(`${apiDomain}/locations`);
+      const data: Array<Location> = response.data.map((location) => ({
+        date_time: location.date_time,
+        lat: location.lat,
+        lng: location.lng,
+        device_mode: location.device_mode,
+      }));
+      console.log(data);
+      setLocationList(data);
+    } catch (e) {
+      console.log(e);
+      showMessage({ title: 'Failed to get location list.', status: 'error' });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {

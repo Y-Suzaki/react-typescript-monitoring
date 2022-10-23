@@ -11,7 +11,7 @@ export const Location: FC = memo(function Setting() {
 
   const onClickSearch = (imei: string, day: string) => {
     console.log(`onClickSearch ${imei} ${day}`);
-    getLocationList(imei, day);
+    (async () => getLocationList(imei, day))();
   };
 
   return (

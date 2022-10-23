@@ -26,19 +26,11 @@ export const LocationList: FC<Props> = memo(function LocationList(props) {
           </Thead>
           <Tbody>
             {locationList.map((location, index) => (
-              <Tr key={index}>
-                <Td key={location.date_time} borderWidth="1px" borderColor="gray.200" bg="white">
-                  {location.date_time}
-                </Td>
-                <Td key={location.lat} borderWidth="1px" borderColor="gray.200" bg="white">
-                  {location.lat}
-                </Td>
-                <Td key={location.lng} borderWidth="1px" borderColor="gray.200" bg="white">
-                  {location.lng}
-                </Td>
-                <Td key={location.device_mode} borderWidth="1px" borderColor="gray.200" bg="white">
-                  {location.device_mode}
-                </Td>
+              <Tr key={index} bg="white" borderColor="gray.200" borderWidth="1px">
+                <Td key={location.date_time}>{location.date_time}</Td>
+                <Td key={location.lat}>{location.lat}</Td>
+                <Td key={location.lng}>{location.lng}</Td>
+                <Td key={location.device_mode}>{location.device_mode}</Td>
               </Tr>
             ))}
           </Tbody>
