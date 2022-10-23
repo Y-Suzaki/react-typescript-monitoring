@@ -40,6 +40,7 @@ export const useAuthMethod = () => {
       setIsAuthenticated(false);
       const message = 'Logout success.';
       showMessage({ title: message, status: 'info' });
+      navigate('/');
       return { success: true, message: '' };
     } catch (error) {
       const message = 'Logout failed.';
